@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 
 const letters = [
-  'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 
-  'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 
-  'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 
-  'y', 'z', 0, 1, 2, 3, 4, 5, 6, 7, 8, 9
+  1, 2, 3, 4, 5, 6, 7, 8, 9,'Z', 'Y', 'X', 
+  'W', 'V', 'U', 'T', 'S', 'R', 'Q', 'P', 
+  'O', 'N', 'M', 'L', 'K', 'J', 'I', 'H', 
+  'G', 'F', 'E', 'D', 'C', 'B', 'A'
 ]; 
 
 const random = (n) => {
@@ -14,12 +14,20 @@ const random = (n) => {
 class Password extends Component {
   constructor(props) {
     super(props)
-    this.state = { password: 'p@ssw0rd' }
+    this.state = { password: "p@ssw0rd" }
   }
 
-  generatePassword(len) {
+  generatePassword() {
     const password = []
-    for (let i = 0; i < len; i ++) {
+    for (let i = 0; i < 3; i ++) {
+      password.push(letters[random(letters.length)])
+    }
+    password.push("-");
+    for (let i = 0; i < 3; i ++) {
+      password.push(letters[random(letters.length)])
+    }
+    password.push("-");
+    for (let i = 0; i < 3; i ++) {
       password.push(letters[random(letters.length)])
     }
     this.setState({ password: password.join('') })
@@ -31,7 +39,7 @@ class Password extends Component {
         <div>{this.state.password}</div>
         <div>
           <button onClick={(e) => {
-            this.generatePassword(8)
+            this.generatePassword()
           }}>Generate</button>
         </div>
       </div>
