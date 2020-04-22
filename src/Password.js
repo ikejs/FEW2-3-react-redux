@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { addPassword } from './actions'
 
 const letters = [
   1, 2, 3, 4, 5, 6, 7, 8, 9,'Z', 'Y', 'X', 
@@ -16,7 +18,7 @@ class Password extends Component {
     super(props)
     this.state = { 
       password: "p@ssw0rd",
-      label: "Facebook" 
+      name: "Facebook" 
     }
   }
 
@@ -39,8 +41,8 @@ class Password extends Component {
   render() {
     return (
       <div>
-        <input type="text" placeholder="Label" value={this.state.label} onChange={(e) => {
-          this.setState({ label: e.target.value })
+        <input type="text" placeholder="Name" value={this.state.name} onChange={(e) => {
+          this.setState({ name: e.target.value })
           }}
         />
         <input type="text" value={this.state.password} onChange={(e) => {
@@ -52,9 +54,26 @@ class Password extends Component {
             this.generatePassword()
           }}>Generate</button>
         </div>
+        <div>
+          <button onClick={(e) => {
+            this.props.addPassword(this.state.name, this.state.password)
+          }}>Save</button>
+        </div>
       </div>
     )
   }
 }
 
-export default Password
+const mapStateToProps = (state) => {
+  return {
+
+  }
+}
+
+const mapDispatchToProps = () => {
+  return {
+    addPassword
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps())(Password)
