@@ -2,9 +2,10 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { addPassword } from './actions'
 import zxcvbn from 'zxcvbn'
+import './Password.css';
 
 const letters = [
-  1, 2, 3, 4, 5, 6, 7, 8, 9,'Z', 'Y', 'X', 
+  1, 2, 3, 4, 5, 6, 7, 8, 9, 'Z', 'Y', 'X', 
   'W', 'V', 'U', 'T', 'S', 'R', 'Q', 'P', 
   'O', 'N', 'M', 'L', 'K', 'J', 'I', 'H', 
   'G', 'F', 'E', 'D', 'C', 'B', 'A'
@@ -42,24 +43,24 @@ class Password extends Component {
 
   render() {
     return (
-      <div>
-        <input type="text" placeholder="Name" value={this.state.name} onChange={(e) => {
-            this.setState({ name: e.target.value })
-          }}
-        />
-        <input type="text" value={this.state.password} onChange={(e) => {
-            this.setState({ password: e.target.value })
-          }}
-        />
-        <div>
-          <button onClick={(e) => {
-            this.generatePassword()
-          }}>Generate</button>
+      <div className="password">
+        <div className="password-inputs">
+          <input type="text" className="password-inputLeft password-input" placeholder="Name" value={this.state.name} onChange={(e) => {
+              this.setState({ name: e.target.value })
+            }}
+          />
+          <input type="text" className="password-inputRight password-input" value={this.state.password} onChange={(e) => {
+              this.setState({ password: e.target.value })
+            }}
+          />
         </div>
-        <div>
-          <button onClick={(e) => {
+        <div className="password-buttons">
+          <button className="password-saveButton password-button" onClick={(e) => {
             this.props.addPassword(this.state.name, this.state.password)
           }}>Save</button>
+          <button className="password-generateButton password-button" onClick={(e) => {
+            this.generatePassword()
+          }}>Generate Password</button>
         </div>
       </div>
     )
