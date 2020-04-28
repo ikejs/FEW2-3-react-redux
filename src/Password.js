@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { addPassword } from './actions'
+import zxcvbn from 'zxcvbn'
 
 const letters = [
   1, 2, 3, 4, 5, 6, 7, 8, 9,'Z', 'Y', 'X', 
@@ -23,30 +24,31 @@ class Password extends Component {
   }
 
   generatePassword() {
-    const password = []
+    let password = "";
     for (let i = 0; i < 3; i ++) {
-      password.push(letters[random(letters.length)])
+      password += letters[random(letters.length)]
     }
-    password.push("-");
+    password += "-";
     for (let i = 0; i < 3; i ++) {
-      password.push(letters[random(letters.length)])
+      password += letters[random(letters.length)]
     }
-    password.push("-");
+    password += "-";
     for (let i = 0; i < 3; i ++) {
-      password.push(letters[random(letters.length)])
+      password += letters[random(letters.length)]
     }
-    this.setState({ password: password.join('') })
+    this.setState({ password })
+    console.log(zxcvbn(password))
   }
 
   render() {
     return (
       <div>
         <input type="text" placeholder="Name" value={this.state.name} onChange={(e) => {
-          this.setState({ name: e.target.value })
+            this.setState({ name: e.target.value })
           }}
         />
         <input type="text" value={this.state.password} onChange={(e) => {
-          this.setState({ password: e.target.value })
+            this.setState({ password: e.target.value })
           }}
         />
         <div>
