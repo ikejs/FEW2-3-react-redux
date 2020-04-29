@@ -6,16 +6,23 @@ class PasswordList extends Component {
   getList() {
     return this.props.passwords.map((pass, index) => {
       return (
-        <div key={index}>
-          name: {pass.name} password: {pass.password}
-        </div>)
+        <tr key={index}>
+          <td>{pass.name}</td>
+          <td className="password-text">{pass.password}</td>
+        </tr>)
     })
   }
 
   render() {
     return (
-      <div>
-        {this.getList()}
+      <div className="password-table">
+        <table>
+          <tr>
+            <th>Name</th>
+            <th>Password</th>
+          </tr>
+          {this.getList()}
+        </table>
       </div>
     )
   }
